@@ -1,0 +1,153 @@
+{
+    "ListItem":[
+        "Home",
+        "Tours",
+        "Booking",
+        "Destinations",
+        "Pages",
+        "Blog",
+        "Shortcodes",
+        "Shop"
+    ],
+    "Home":{
+        "ListItem":[
+        "Home 1 - Background Image",
+        "Home 2 - Youtube Image",
+        "Home 3 - Google Inspired",
+        "Home 4 - Travel Site"
+    ]},
+    "Tours":{
+        "ListItem":[
+            "Tour Classic",
+            "Fullwidth",
+            "Tour Classic Sidebar",
+            "Tour Grid Fullwidth",
+            "Tour Grid Sidebar",
+            "Tour List Sidebar",
+            "Tour Header Type",
+            "Tour Categories"
+        ],
+
+        "Tour Classic":"Tour Classic",
+        "Fullwidth":[
+            "2 Columns",
+            "3 Columns",
+            "4 Columns"
+        ],
+        "Tour Classic Sidebar":[
+            "Right Sidebar",
+            "Left Sidebar"
+        ],
+        "Tour Grid Fullwidth":[
+            "2 Columns",
+            "3 Columns",
+            "4 Columns"
+        ],
+        "Tour Grid Sidebar":[
+            "Right Sidebar",
+            "Left Sidebar"
+        ],
+        "Tour List Sidebar":[
+            "Right Sidebar",
+            "Left Sidebar"
+        ],
+        "Tour Header Type":[
+            "Featured Image",
+            "Video"
+        ],
+        "Tour Categories":[
+            "Rural",
+            "Snow & Ice",
+            "Wildlife",
+            "Mountain"
+        ]
+        
+
+    },
+    "Booking":{
+        "ListItem":[
+            "Online Payment for Booking",
+            "Custom Booking Form",
+            "Tour Durations",
+            "Custom Booking URL for Affiliate Tour",
+            "Custom Booking using custom HTML & Shortcode",
+            "Header Options",
+            "Layout Options"
+        ],
+        "Online Payment for Booking":[
+            "Variable Tour Pricing",
+            "Simple Tour Pricing"
+        ],
+        "Custom Booking Form":[
+            "Booking Form + Sub Tour Date",
+            "Booking Form + Custom Date"
+        ],
+        "Tour Durations":[
+            "Single Day Tour",
+            "Multiple Days Tour"
+        ],
+        "Custom Booking URL for Affiliate Tour":[],
+        "Custom Booking using custom HTML & Shortcode":[],
+        "Header Options":[
+            "Standard Background Header",
+            "Video Background Header"
+        ],
+        "Layout Options":[
+            "With Sidebar",
+            "Fullwidth"
+        ]
+    },
+    "Destinations":{
+        "ListItem":[
+        "Destination Fullwidth",
+        "Destination + Video Header",
+        "Destination Right Sidebar",
+        "Destination Left Sidebar",
+        "Single Destination",
+        "Single Destination + Video"
+    ]},
+    "Pages":{
+        "ListItem":[
+        "About Us",
+        "Contact Us",
+        "FAQs",
+        "Gallery",
+        "Page Fullwidth",
+        "Page + Video Background Header",
+        "Page Right Sidebar",
+        "Page Left Sidebar"
+    ]},
+    "Blog":{
+        "ListItem":[
+        "Blog Right Sidebar",
+        "Blog Left Sidebar",
+        "Blog Fullwidth",
+        "Blog Grid Right Sidebar",
+        "Blog Grid Left Sidebar",
+        "Blog Grid Fullwidth",
+        "Blog Full + Grid Right Sidebar ",
+        "Blog Full + Grid Left Sidebar",
+        "Blog Full + Grid Fullwidth"
+    ]},
+    "Shortcodes":{
+        "ListItem":[
+        "Accordion & Toggles",
+        "Alert Boxes",
+        "Animated Content",
+        "Buttons & Social Icons",
+        "Columns",
+        "Google Maps",
+        "Image Frame & Animation",
+        "Image Teasers",
+        "Pricing Tables",
+        "Tabs"
+    ]},
+    "Shop":{
+        "ListItem":[
+        "Shop Fullwidth",
+        "Shop Sidebar",
+        "Single Product Fullwidth",
+        "Single Product With Sidebar"
+    ]}
+    
+}
