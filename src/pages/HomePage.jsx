@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from "./HomePage.module.scss";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import videoIntro from "../assest/videoIntro.mp4";
 import data from "../assest/data.json"
-import { Button, InputAdornment, MenuItem, TextField } from '@mui/material';
+import { Button, InputAdornment } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { OutlinedInput } from '@mui/material';
 import Title from '../components/Title';
@@ -19,25 +19,35 @@ import {
     AccessAlarmOutlined,
     KeyboardArrowUp,
     KeyboardArrowDown,
+    CalendarMonth,
+    Sort,
     Star,
     StarBorder,
     Facebook,
     Twitter,
     YouTube,
     Pinterest,
-    Instagram
+    Instagram,
+    Settings,
+    FavoriteBorder
 } from '@mui/icons-material';
 import facebookIcon from "../assest/facebook.png";
 import twitterIcon from "../assest/twitter.png";
 import youtubeIcon from "../assest/youtube.png";
 import pinterestIcon from "../assest/pinterest.png";
 import instagramIcon from "../assest/instagram.png";
+import SelectCustom from '../components/SelectCustom';
+import ItemMenu from '../components/ItemMenu';
+
 
 export default function HomePage() {
     const [colorT, setColor] = useState(false);
     const [isShowAdvanced, setIsShowAdvanced] = useState(false);
     const [isShowDrawer, setShowDrawer] = useState(false);
     const [isShowMore, setIsShowMore] = useState(false);
+    const [isShowSideBar,setIsShowSideBar] = useState(false)
+    const [isAnimation,setAnimation] = useState(false)
+    const [windownWidth,setWindownWidth] = useState(getWindownWidth())
     const [dataOptions, setDataOptions] = useState("Home");
     const changeColor = () => {
         if (window.scrollY > 200) {
@@ -53,47 +63,63 @@ export default function HomePage() {
             setIsShowAdvanced(true)
         }
     }
-    window.addEventListener("scroll", changeColor)
-    console.log(colorT)
-    const months = [
-        {
-            value: 'USD',
-            label: '$',
-        },
-        {
-            value: 'EUR',
-            label: '€',
-        },
-        {
-            value: 'BTC',
-            label: '฿',
-        },
-        {
-            value: 'JPY',
-            label: '¥',
-        },
-    ]
-    // console.log(dataOptions)
-    console.log(data[`${dataOptions}`])
-
+    window.addEventListener("scroll", changeColor);
+    window.addEventListener("resize",setIsAnimationF)
+    function getWindownWidth(){
+        return window.innerWidth
+    }
+    function setIsAnimationF(){
+        if(windownWidth<905){
+            setAnimation(false)
+        }
+    }
+    useEffect(()=>{
+        function handleResize(){
+            setWindownWidth(getWindownWidth())
+        }
+        
+        window.addEventListener("resize",handleResize)
+        
+        return ()=>
+        window.removeEventListener("resize",handleResize)
+    
+    })
+    // window.addEventListener("resize",setWidth(window.innerWidth))
+    // 
+    console.log(window.scrollY)
     return (
         <div className={styles.wrapper}>
+            <div className={colorT ? styles.headerNavbarRoll : styles.headerNavbar}>
+                <div className={styles.logo}>
+                    <a href="/" >
+                        {colorT ? <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/images/logo@2x.png" alt="Not found" /> :
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/images/logo@2x_white.png" alt="Not found" />}
+
+                    </a>
+                </div>
+                <div className={styles.options}>
+                    <div className={styles.listMenu}>
+                        {data.ListItem.map((value) =>
+                        <span key={value}>
+                            <ItemMenu
+                                
+                                className={styles.itemMenu}
+                                title={value}
+                                listOption={data[`${value}`]}
+                            /></span>)}
+                    </div>
+                    <MenuIcon onClick={() => setShowDrawer(true)} />
+                    <span style={{ position: 'relative' }}>
+                        <ShoppingCartOutlined style={{ marginLeft: '10px' }} />
+                        <span className={styles.numCart}>0</span>
+                    </span>
+
+
+                </div>
+            </div>
             <div className={styles.header}>
                 <video src={videoIntro} autoPlay loop muted alt="Not found" />
-                <div className={colorT ? styles.headerNavbarRoll : styles.headerNavbar}>
-                    <div className={styles.logo}>
-                        <a href="/" >
 
-                            {colorT ? <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/images/logo@2x.png" alt="Not found" /> :
-                                <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/images/logo@2x_white.png" alt="Not found" />}
-
-                        </a>
-                    </div>
-                    <div className={styles.options}>
-                        <MenuIcon onClick={() => setShowDrawer(true)} />
-                        <ShoppingCartOutlined />
-                    </div>
-                </div>
                 <div className={styles.headerContent}>
                     <Title
                         title="Where do you want to go?"
@@ -110,33 +136,10 @@ export default function HomePage() {
                             />
                         </Grid>
                         <Grid xs={12} md={3}>
-                            <TextField
-                                className={styles.inputHeader}
-                                size="small"
-                                select
-                                defaultValue="EUR"
-                                endAdornment={<InputAdornment position="end">ufnjdis</InputAdornment>}
-                                fullWidth
-                            >
-                                {months.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}
-                                    >{option.label}</MenuItem>))}
-                            </TextField>
+                            <SelectCustom list={data.months} icon={<CalendarMonth />} />
                         </Grid>
                         <Grid xs={12} md={3}>
-                            <TextField
-                                className={styles.inputHeader}
-                                size="small"
-                                select
-                                defaultValue="EUR"
-                                endAdornment={<InputAdornment position="end">ufnjdis</InputAdornment>}
-                                fullWidth
-
-                            >
-                                {months.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}
-                                    >{option.label}</MenuItem>))}
-                            </TextField>
+                            <SelectCustom list={data.sort} icon={<Sort />} />
                         </Grid>
                         <Grid xs={12} md={3}>
                             <Button className={styles.buttonSearch} variant="contained" fullWidth>Search</Button>
@@ -144,33 +147,10 @@ export default function HomePage() {
                     </Grid>
                     {isShowAdvanced ? <Grid style={{ width: '100%', marginTop: '8px' }} container spacing={1}>
                         <Grid xs={12} md={3}>
-                            <TextField
-                                className={styles.inputHeader}
-                                size="small"
-                                select
-                                defaultValue="EUR"
-                                endAdornment={<InputAdornment position="end">ufnjdis</InputAdornment>}
-                                fullWidth
-                            >
-                                {months.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}
-                                    >{option.label}</MenuItem>))}
-                            </TextField>
+                            <SelectCustom list={data.categories} icon={<KeyboardArrowDown />} />
                         </Grid>
                         <Grid xs={12} md={3}>
-                            <TextField
-                                className={styles.inputHeader}
-                                size="small"
-                                select
-                                defaultValue="EUR"
-                                endAdornment={<InputAdornment position="end">ufnjdis</InputAdornment>}
-                                fullWidth
-
-                            >
-                                {months.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}
-                                    >{option.label}</MenuItem>))}
-                            </TextField>
+                            <SelectCustom list={data.detinations} icon={<KeyboardArrowDown />} />
                         </Grid>
                         <Grid xs={12} md={3}>
                             <OutlinedInput
@@ -182,7 +162,6 @@ export default function HomePage() {
                             />
                         </Grid>
                         <Grid className={styles.spaceItem} xs={12} md={3}>
-
                         </Grid>
                     </Grid> : <></>}
 
@@ -408,21 +387,25 @@ export default function HomePage() {
                     <p>© Copyright Grand Tour Theme Demo - Theme by ThemeGoods</p>
                 </div>
             </div>
-            <Drawer anchor='right' open={isShowDrawer} onClose={() => 
-                {
-                    setIsShowMore(false)
-                    setShowDrawer(false)
-                    }}>
+            <Drawer anchor='right' open={isShowDrawer} onClose={() => {
+                setIsShowMore(false)
+                setShowDrawer(false)
+            }}>
                 <div className={styles.drawerNav}>
-                    <button onClick={() => {setShowDrawer(false)
-                    setIsShowMore(false)
+                    <button onClick={() => {
+                        setShowDrawer(false)
+                        setIsShowMore(false)
                     }}>X</button>
                     {isShowMore ?
                         <div className={styles.animationMoreOption}>
                             <div className={styles.back} onClick={() => setIsShowMore(false)}>{`< Back`}</div>
                             <ul>
                                 {data[`${dataOptions}`].ListItem.map((e) =>
-                                    <li key={e}><a href="/#"><h2>{e}</h2></a></li>)}
+                                    <li key={e}><a href="/#"><h2>{e}</h2></a>
+                                        {data[`${dataOptions}`][`${e}`] ? data[`${dataOptions}`][`${e}`].map((value) =>
+                                            <ul><li><h3>{value}</h3></li></ul>
+                                        ) : <></>}
+                                    </li>)}
                             </ul> </div> :
                         <div >
                             <ul className={styles.animationOption}>
@@ -487,14 +470,91 @@ export default function HomePage() {
                         </li>
                     </ul>
                     <div className={styles.listIcon}>
-                        <Facebook style={{fontSize:'30px'}}/>
-                        <Twitter style={{fontSize:'30px'}}/>
-                        <YouTube style={{fontSize:'30px'}}/>
-                        <Pinterest style={{fontSize:'30px'}}/>
-                        <Instagram style={{fontSize:'30px'}}/>
+                        <Facebook style={{ fontSize: '30px' }} />
+                        <Twitter style={{ fontSize: '30px' }} />
+                        <YouTube style={{ fontSize: '30px' }} />
+                        <Pinterest style={{ fontSize: '30px' }} />
+                        <Instagram style={{ fontSize: '30px' }} />
                     </div>
                 </div>
             </Drawer>
+            <div  className={isAnimation ?`${styles.sideBaroptions} ${isShowSideBar?styles.showSidebar:styles.hideSidebar}`:styles.sideBaroptions}>
+                <ul className={styles.listOption}>
+                    <li style={{cursor:"pointer"}}
+                        onClick={()=>{
+                            setAnimation(true)
+                            setIsShowSideBar(!isShowSideBar)
+                        }
+                        }
+                    >
+                        <Settings />
+                    </li>
+                    <li>
+                        <FavoriteBorder/>
+                    </li>
+                    <li>
+                        <ShoppingCartOutlined/>
+                    </li>
+                </ul>
+                <div className={styles.sideBar}>
+                    <h4 >Created With Grand Tour</h4>
+                    <div >
+                        We designed Grand Tour theme to make it works especially for tour &amp; travel site. Here are a few included examples that you can import with one click.
+                    </div>
+                    <ul className={styles.listImage}>
+                        <li>
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/cache/demos/customizer/screenshots/styling1.jpg" alt="" />
+                        </li>
+                        <li>
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/cache/demos/customizer/screenshots/demo2.jpg" alt="" />
+                        </li>
+                    </ul>
+                    <h4>Predefined Colors</h4>
+                    <ul className={styles.listColor}>
+                        <li style={{backgroundColor:"#FF4A52"}}></li>
+                        <li style={{backgroundColor:"#FF9500"}}></li>
+                        <li style={{backgroundColor:"#FFCC00"}}></li>
+                        <li style={{backgroundColor:"#4CD964"}}></li>
+                        <li style={{backgroundColor:"#5AC8FA"}}></li>
+                        <li style={{backgroundColor:"#007AFF"}}></li>
+                        <li style={{backgroundColor:"#5856D6"}}></li>
+                        <li style={{backgroundColor:"#FF2D55"}}></li>
+                    </ul>
+                    <h4>Predefined Stylings</h4>
+                    <ul className={styles.listImage}>
+                        <li>
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/cache/demos/customizer/screenshots/styling1.jpg" alt="" />
+                        </li>
+                        <li>
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/cache/demos/customizer/screenshots/styling2.jpg" alt="" />
+                        </li>
+                        <li>
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/cache/demos/customizer/screenshots/styling1.jpg" alt="" />
+                        </li>
+                        <li>
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/cache/demos/customizer/screenshots/styling4.jpg" alt="" />
+                        </li>
+                        <li>
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/cache/demos/customizer/screenshots/styling5.jpg" alt="" />
+                        </li>
+                        <li>
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/cache/demos/customizer/screenshots/styling6.jpg" alt="" />
+                        </li>
+                        <li>
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/cache/demos/customizer/screenshots/styling7.jpg" alt="" />
+                        </li>
+                        <li>
+                            <img src="https://themes-themegoods.b-cdn.net/grandtour/demo/wp-content/themes/grandtour/cache/demos/customizer/screenshots/styling8.jpg" alt="" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {window.scrollY>200?<div onClick={()=>{
+                window.scrollTo({top: 0, left: 0, behavior: 'smooth' })
+            }} className={styles.moveTop}>
+                <KeyboardArrowUp/>
+            </div>:<></>}
+            
         </div >
     )
 }

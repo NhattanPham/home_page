@@ -8,12 +8,13 @@ function ItemValueTrip(props) {
     const checkStar = (num) => {
         if (num < props.numStar) {
             return (
-                <li><StarIcon
+                <li key={num}><StarIcon
+                
                     fontSize='small'
                 /></li>
             )
         } else
-            return <li><StarBorderIcon
+            return <li key={num}><StarBorderIcon
                 fontSize='small'
             /></li>
 

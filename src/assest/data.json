@@ -18,8 +18,7 @@
     ]},
     "Tours":{
         "ListItem":[
-            "Tour Classic",
-            "Fullwidth",
+            "Tour Classic Fullwidth",
             "Tour Classic Sidebar",
             "Tour Grid Fullwidth",
             "Tour Grid Sidebar",
@@ -28,8 +27,7 @@
             "Tour Categories"
         ],
 
-        "Tour Classic":"Tour Classic",
-        "Fullwidth":[
+        "Tour Classic Fullwidth":[
             "2 Columns",
             "3 Columns",
             "4 Columns"
@@ -148,6 +146,165 @@
         "Shop Sidebar",
         "Single Product Fullwidth",
         "Single Product With Sidebar"
-    ]}
-    
+    ]},
+    "months" : [
+        {
+            "value": "any",
+            "label": "Any Month"
+        },
+        {
+            "value": "january",
+            "label": "January"
+        },
+        {
+            "value": "february",
+            "label": "February"
+        },
+        {
+            "value": "march",
+            "label": "March"
+        },
+        {
+            "value": "april",
+            "label": "April"
+        },
+        {
+            "value": "may",
+            "label": "May"
+        },
+        {
+            "value": "june",
+            "label": "June"
+        },
+        {
+            "value": "july",
+            "label": "July"
+        },
+        {
+            "value": "august",
+            "label": "August"
+        },
+        {
+            "value": "september",
+            "label": "September"
+        },
+        {
+            "value": "october",
+            "label": "October"
+        },
+        {
+            "value": "november",
+            "label": "November"
+        },
+        {
+            "value": "december",
+            "label": "December"
+        }
+    ],
+    "sort" : [
+        {
+            "value": "date",
+            "label": "Sort By Date"
+        },
+        {
+            "value": "price_low",
+            "label": "Price Low to High"
+        },
+        {
+            "value": "price_high",
+            "label": "Price High to Low"
+        },
+        {
+            "value": "name",
+            "label": "Sort By Name"
+        },
+        {
+            "value": "popular",
+            "label": "Sort By Popularity"
+        },
+        {
+            "value": "review",
+            "label": "Sort By Review Score"
+        },
+        {
+            "value": "date",
+            "label": "Sort By Date"
+        }
+    ] ,
+    "categories" : [
+        {
+            "value": "",
+            "label": "All Categories"
+        },
+        {
+            "value": "mountain",
+            "label": "Mountain"
+        },
+        {
+            "value": "rural",
+            "label": "Rural"
+        },
+        {
+            "value": "snow-ice",
+            "label": "Snow & Ice"
+        },
+        {
+            "value": "wildlife",
+            "label": "Wildlife"
+        }
+    ],
+    "detinations" :[
+        {
+            "value": "",
+            "label": "Any Destinations"
+        },
+        {
+            "value": "277",
+            "label": "Tokyo"
+        },
+        {
+            "value": "278",
+            "label": "Seoul"
+        },
+        {
+            "value": "279",
+            "label": "Paris"
+        },
+        {
+            "value": "284",
+            "label": "London"
+        },
+        {
+            "value": "285",
+            "label": "Venice"
+        },
+        {
+            "value": "287",
+            "label": "Miami"
+        },
+        {
+            "value": "289",
+            "label": "Rome"
+        },
+        {
+            "value": "270",
+            "label": "Prague"
+        },
+        {
+            "value": "291",
+            "label": "California"
+        },
+        {
+            "value": "292",
+            "label": "Kyoto"
+        },
+        {
+            "value": "293",
+            "label": "Hong Kong"
+        },
+        {
+            "value": "294",
+            "label": "Santorini"
+        }
+    ] 
 }
